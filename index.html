@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moe Hishmeh · Health Optimization Video Editor</title>
+<meta name="description" content="Video editing for health optimization creators: biohacking, longevity, fitness, nutrition, nootropics and beyond. I understand your content because I'm already your audience.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0f1a;
+    --bg-card: #111827;
+    --bg-card2: #162032;
+    --border: #1e3a5f;
+    --teal: #4dd9ac;
+    --teal-dim: #1a3d32;
+    --text-primary: #e8f2ff;
+    --text-secondary: #7a90a8;
+    --text-card: #c8ddf0;
+    --btn-text: #0a1a14;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 13px;
+    color: var(--text-secondary);
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  /* SECTIONS */
+  section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  /* 1. HERO */
+  .hero {
+    text-align: center;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero h1 span { color: var(--teal); }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--btn-text);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.88; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+    margin-left: 12px;
+  }
+
+  /* 2. HIGHLIGHT SHOWCASE */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 2rem;
+  }
+
+  .portfolio-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .portfolio-card:hover { border-color: var(--teal); }
+
+  .portfolio-thumb {
+    background: var(--bg-card2);
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .play-btn svg { margin-left: 3px; }
+
+  .coming-soon {
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-info {
+    padding: 1rem 1.1rem;
+  }
+
+  .portfolio-tag {
+    font-size: 11px;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .portfolio-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-card);
+  }
+
+  /* 3. SOCIAL PROOF */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 2rem;
+  }
+
+  .proof-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .proof-quote {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    font-style: italic;
+  }
+
+  .proof-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .proof-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .proof-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-card);
+  }
+
+  .proof-handle {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .proof-placeholder {
+    background: var(--bg-card);
+    border: 0.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .proof-placeholder p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .proof-placeholder span { color: var(--teal); }
+
+  /* 4. ABOUT */
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  .about-avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .about-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--bg-card2);
+    border: 1.5px solid var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .about-location {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .about-text h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-text p strong { color: var(--text-card); font-weight: 500; }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.25rem;
+  }
+
+  .tag {
+    font-size: 12px;
+    color: var(--teal);
+    background: var(--teal-dim);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* 5. CTA */
+  .cta-section {
+    text-align: center;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .cta-section h2 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section h2 span { color: var(--teal); }
+
+  .cta-section p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 28px; }
+    .about-inner { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MOE HISHMEH · VIDEO EDITOR</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- 1. HERO / LANDING -->
+<section class="hero">
+  <p class="hero-eyebrow">Health Optimization Video Editor</p>
+  <h1>Your content deserves an editor who <span>actually gets the science</span></h1>
+  <p>Video editing for health optimization creators: biohacking, longevity, fitness, nutrition, nootropics and beyond. I understand your content because I'm already your audience.</p>
+  <a href="#contact" class="btn">Work with me</a>
+  <a href="#work" class="btn btn-ghost">View my work</a>
+</section>
+
+<hr class="divider">
+
+<!-- 2. HIGHLIGHT SHOWCASE -->
+<section id="work">
+  <p class="section-label">Portfolio</p>
+  <h2 style="font-size:24px; font-weight:600; margin-bottom:0.5rem;">Recent edits</h2>
+  <p style="font-size:14px; color:var(--text-secondary); margin-bottom:0;">A selection of health optimization content I've edited.</p>
+
+  <div class="portfolio-grid">
+    <div class="portfolio-card">
+      <div class="portfolio-thumb">
+        <div class="coming-soon">Coming soon</div>
+      </div>
+      <div class="portfolio-info">
+        <p class="portfolio-tag">Longevity · YouTube</p>
+        <p class="portfolio-title">Placeholder: your first re-edit</p>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-thumb">
+        <div class="coming-soon">Coming soon</div>
+      </div>
+      <div class="portfolio-info">
+        <p class="portfolio-tag">Biohacking · YouTube</p>
+        <p class="portfolio-title">Placeholder: your second re-edit</p>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-thumb">
+        <div class="coming-soon">Coming soon</div>
+      </div>
+      <div class="portfolio-info">
+        <p class="portfolio-tag">Health Optimization · YouTube</p>
+        <p class="portfolio-title">Placeholder: your third re-edit</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 3. SOCIAL PROOF -->
+<section id="proof">
+  <p class="section-label">Social proof</p>
+  <h2 style="font-size:24px; font-weight:600; margin-bottom:0.5rem;">What creators say</h2>
+
+  <div class="proof-grid">
+    <div class="proof-placeholder">
+      <p><span>Currently taking first clients.</span><br><br>Testimonials coming soon. If you're a health optimization creator looking for a dedicated editor, let's work together.</p>
+    </div>
+    <div class="proof-placeholder">
+      <p>Free edits available for the right creators in exchange for honest feedback and a testimonial.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 4. ABOUT -->
+<section id="about">
+  <p class="section-label">About me</p>
+  <div class="about-inner">
+    <div class="about-avatar-wrap">
+      <div class="about-avatar">MH</div>
+      <p class="about-location">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Chicago, IL
+      </p>
+    </div>
+    <div class="about-text">
+      <h2>I'm not just your editor,<br>I'm your audience.</h2>
+      <p>Most editors treat health optimization content like any other niche. I don't. I've spent years obsessing over <strong>biohacking, longevity, peptides, and performance</strong>, which means I understand why a specific clip matters, what your audience responds to, and how to tell your story in a way that converts viewers into loyal followers.</p>
+      <p>Based in Chicago, IL and fully remote, I'm built for the kind of async collaboration that works for busy creators. Send me footage, get back a polished edit.</p>
+      <div class="tags">
+        <span class="tag">Biohacking</span>
+        <span class="tag">Longevity</span>
+        <span class="tag">Peptides</span>
+        <span class="tag">Nootropics</span>
+        <span class="tag">Fitness</span>
+        <span class="tag">Nutrition</span>
+        <span class="tag">DaVinci Resolve</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 5. CTA -->
+<section id="contact" class="cta-section">
+  <p class="section-label">Get in touch</p>
+  <h2>Ready to <span>level up</span> your content?</h2>
+  <p>Whether you need a free trial edit or want to discuss an ongoing arrangement, reach out and I'll get back to you within 24 hours.</p>
+  <a href="mailto:your@email.com" class="btn">Send me a message</a>
+</section>
+
+<footer>
+  © 2025 Moe Hishmeh · Health Optimization Video Editor · Chicago, IL
+</footer>
+
+</body>
+</html>
