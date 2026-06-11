@@ -288,12 +288,21 @@
     gap: 1rem;
   }
 
-  .about-avatar {
-    width: 100px;
-    height: 100px;
+  .about-avatar-frame {
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
+    border: 2px solid var(--teal);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .about-avatar {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 1.5px solid var(--teal);
+    object-position: center 18%;
+    transform: scale(1.35);
   }
 
   .about-location {
@@ -485,7 +494,9 @@
   <p class="section-label">About me</p>
   <div class="about-inner">
     <div class="about-avatar-wrap">
-      <img src="editedbymoePIC.jpg" alt="Moe Hishmeh" class="about-avatar">
+      <div class="about-avatar-frame">
+        <img src="editedbymoePIC.jpg" alt="Moe Hishmeh" class="about-avatar">
+      </div>
       <p class="about-location">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Chicago, IL
