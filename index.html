@@ -165,7 +165,7 @@
   }
 
   .showcase-video iframe,
-  .showcase-poster {
+  .showcase-video #youtube-showcase-player {
     position: absolute;
     top: 0;
     left: 0;
@@ -173,43 +173,6 @@
     height: 100%;
     border: 0;
   }
-
-  .showcase-poster {
-    padding: 0;
-    cursor: pointer;
-    background: var(--bg-card2);
-    overflow: hidden;
-  }
-
-  .showcase-poster img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: opacity 0.2s;
-  }
-
-  .showcase-poster:hover img { opacity: 0.82; }
-
-  .showcase-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    transition: opacity 0.2s;
-  }
-
-  .showcase-poster:hover .showcase-play { opacity: 0.92; }
-
-  .showcase-play svg { margin-left: 4px; }
 
   .showcase-body {
     padding: 1.25rem 1.5rem 1.5rem;
@@ -506,17 +469,8 @@
 
   <div class="showcase-list">
     <article class="showcase-item">
-      <div class="showcase-video" data-video-id="7uhUdSe6TgU" data-video-title="Tony Huge Edit | Before &amp; After">
-        <button class="showcase-poster" type="button" aria-label="Play Tony Huge Edit | Before &amp; After">
-          <img
-            src="https://i.ytimg.com/vi/7uhUdSe6TgU/maxresdefault.jpg"
-            alt="Tony Huge Edit | Before &amp; After thumbnail"
-            onerror="this.src='https://i.ytimg.com/vi/7uhUdSe6TgU/hqdefault.jpg'"
-          >
-          <span class="showcase-play" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0a1a14"><path d="M8 5v14l11-7z"/></svg>
-          </span>
-        </button>
+      <div class="showcase-video">
+        <div id="youtube-showcase-player"></div>
       </div>
       <div class="showcase-body">
         <p class="showcase-tag">Pharmacology</p>
@@ -607,25 +561,54 @@
 </footer>
 
 <script>
-  document.querySelectorAll('.showcase-video[data-video-id]').forEach(function (container) {
-    var poster = container.querySelector('.showcase-poster');
-    if (!poster) return;
+  var showcasePlayer;
 
-    poster.addEventListener('click', function () {
-      var iframe = document.createElement('iframe');
-      var videoId = container.dataset.videoId;
-      var origin = window.location.origin && window.location.origin !== 'null'
-        ? '&origin=' + encodeURIComponent(window.location.origin)
-        : '';
+  function setHighestQuality(player) {
+    var qualities = player.getAvailableQualityLevels();
+    if (!qualities || !qualities.length) return;
 
-      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0' + origin;
-      iframe.title = container.dataset.videoTitle || 'Portfolio video';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
+    var preferred = ['hd1080', 'hd720', 'large'];
+    for (var i = 0; i < preferred.length; i++) {
+      if (qualities.indexOf(preferred[i]) !== -1) {
+        player.setPlaybackQuality(preferred[i]);
+        return;
+      }
+    }
+  }
 
-      container.replaceChild(iframe, poster);
+  function onYouTubeIframeAPIReady() {
+    var origin = window.location.origin && window.location.origin !== 'null'
+      ? window.location.origin
+      : undefined;
+
+    showcasePlayer = new YT.Player('youtube-showcase-player', {
+      videoId: '7uhUdSe6TgU',
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        rel: 0,
+        playsinline: 1,
+        modestbranding: 1,
+        origin: origin
+      },
+      events: {
+        onReady: function (event) {
+          event.target.mute();
+          event.target.playVideo();
+          setHighestQuality(event.target);
+        },
+        onStateChange: function (event) {
+          if (event.data === YT.PlayerState.PLAYING) {
+            setHighestQuality(event.target);
+          }
+        }
+      }
     });
-  });
+  }
+
+  var youtubeApiScript = document.createElement('script');
+  youtubeApiScript.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(youtubeApiScript);
 </script>
 
 </body>
